@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  GCommerce
+
+  Created by mac 2019 on 10/28/22.
+  
+*/
+"translate_id_0001"="最近";
+"translate_id_0002"="検索";
+"translate_id_0003"="設定";
+"translate_id_0004"="最近の製品";
+"translate_id_0005"="商品検索";
+"translate_id_0006"="商品を検索";
+"translate_id_0007"="すべての製品を検索します。\n上部の検索バーに何か入力してください。";
+"translate_id_0008"="商品詳細";
+"translate_id_0009"="購入";
+"translate_id_0010"="切り替える";
+"translate_id_0011"="ライト";
+"translate_id_0012"="ダーク";
+"translate_id_0013"="モード";
+"translate_id_0014"="English";
+"translate_id_0015"="日本語";
+"translate_id_0016"="確認";
+"translate_id_0017"="キャンセル";
+"translate_id_0018"="言語を選択";
+"translate_id_0019"="言語を変更";
