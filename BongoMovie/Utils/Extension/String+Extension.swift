@@ -1,8 +1,8 @@
 //
 //  String+Extension.swift
-//  GCommerce
+//  BongoMovie
 //
-//  Created by mac 2019 on 10/28/22.
+//  Created by mac 2019 on 03/11/2022.
 //
 
 import Foundation
@@ -24,6 +24,19 @@ extension String {
             attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: forgroundColor, range: NSRange(location: 0, length: attributedString.length))
             attributedString.addAttribute(NSAttributedString.Key.backgroundColor, value: backgroundColor, range: NSRange(location: 0, length: attributedString.length))
             return attributedString
+        }
+        return nil
+    }
+    
+    func convertTo(informat: String, outformat: String)-> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: .gregorian)
+        dateFormatter.dateFormat = informat
+        let date = dateFormatter.date(from: self)
+        dateFormatter.dateFormat = outformat
+        if let date = date {
+            let dateStr = date.toString(format: outformat)
+            return dateStr
         }
         return nil
     }

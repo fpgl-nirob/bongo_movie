@@ -1,8 +1,8 @@
 //
 //  UIView+Extension.swift
-//  GCommerce
+//  BongoMovie
 //
-//  Created by mac 2019 on 10/28/22.
+//  Created by mac 2019 on 03/11/2022.
 //
 
 import Foundation
@@ -16,6 +16,27 @@ extension UIView {
         if borderWidth > 0.0 {
             self.layer.borderWidth = borderWidth
             self.layer.borderColor = borderColor.resolvedColor(with: AppManager.shared.traitCollection ?? self.traitCollection).cgColor
+        }
+    }
+    
+    // roundWithShadow function works well all UIView elements except UITextView
+    // if apply roundWithShadow to UITextView then the text is going upper from the bounds frame.
+    func roundWithShadow(_cornerRadius: CGFloat, _x: CGFloat, _y: CGFloat, _blar: CGFloat, _spread: CGFloat = 0.0, _shadowOpacity: Float = 1.0, _shadowColor: UIColor) {
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = _cornerRadius
+        
+        //To apply Shadow
+        self.layer.masksToBounds = false
+        self.layer.shadowOpacity = _shadowOpacity
+        self.layer.shadowRadius = _blar / 2.0
+        self.layer.shadowOffset = CGSize(width: _x, height: _y) // Use any CGSize
+        self.layer.shadowColor = _shadowColor.cgColor
+        if _spread == 0 {
+            self.layer.shadowPath = nil
+        } else {
+            let dx = -_spread
+            let rect = bounds.insetBy(dx: dx, dy: dx)
+            self.layer.shadowPath = UIBezierPath(rect: rect).cgPath
         }
     }
     
@@ -160,7 +181,7 @@ extension UIView {
         return pickerView
     }
     
-    public static func createScrollView(delegate: UIScrollViewDelegate) -> UIScrollView {
+    public static func createScrollView(delegate: UIScrollViewDelegate?) -> UIScrollView {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.delegate = delegate

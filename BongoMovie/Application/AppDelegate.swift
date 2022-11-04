@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  GCommerce
+//  BongoMovie
 //
-//  Created by mac 2019 on 10/28/22.
+//  Created by mac 2019 on 03/11/2022.
 //
 
 import UIKit
@@ -40,12 +40,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
     }
     
-//    public func setHomeViewController() {
-//        let searchVC = ProductListViewController()
-//        let searchNC = CustomNavigationController(rootViewController: searchVC)
-//        window?.rootViewController = searchNC
-//        window?.makeKeyAndVisible()
-//    }
+    public func setHomeViewController() {
+        let searchVC = TopRatedMoviesViewController()
+        let searchNC = CustomNavigationController(rootViewController: searchVC)
+        window?.rootViewController = searchNC
+        window?.makeKeyAndVisible()
+    }
 
 }
 

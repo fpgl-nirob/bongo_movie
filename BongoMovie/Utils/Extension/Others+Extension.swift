@@ -1,8 +1,8 @@
 //
 //  Others+Extension.swift
-//  GCommerce
+//  BongoMovie
 //
-//  Created by mac 2019 on 10/28/22.
+//  Created by mac 2019 on 03/11/2022.
 //
 
 import Foundation
@@ -55,6 +55,24 @@ extension UICollectionViewCell {
 extension UITableViewCell {
     static var cellIdentifier: String {
         return String(describing: self)
+    }
+}
+
+extension Date {
+    func toString(format: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        let str = dateFormatter.string(from: self)
+
+        return str
+    }
+}
+
+extension Int {
+    var hourFormat: String {
+        let hours = self / 60
+        let minutes = self % 60
+        return "\(hours)h \(minutes)m"
     }
 }
 
