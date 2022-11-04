@@ -34,27 +34,38 @@ class ProductCell: UICollectionViewCell {
         return lbl
     }()
     
-    private let priceLbl: UILabel = {
+    private let releaseLbl: UILabel = {
         let lbl = UIView.createLabel("")
         lbl.numberOfLines = 1
         lbl.lineBreakMode = .byCharWrapping
-        lbl.textColor = .orange
+        lbl.textColor = .lightGray
         lbl.textAlignment = .left
-        lbl.font = .InterMedium(ofSize: 16.s)
+        lbl.font = .InterRegular(ofSize: 12.s)
+        return lbl
+    }()
+    
+    private let descriptionLbl: UILabel = {
+        let lbl = UIView.createLabel("")
+        lbl.numberOfLines = 2
+        lbl.lineBreakMode = .byCharWrapping
+        lbl.textColor = .whiteBlack
+        lbl.textAlignment = .left
+        lbl.font = .InterRegular(ofSize: 12.s)
         return lbl
     }()
     
     private let ratingView: CosmosView = {
         let ratV = CosmosView()
         ratV.settings.updateOnTouch = false
-        ratV.settings.starSize = 16.s
+        ratV.settings.starSize = 14.s
         ratV.settings.starMargin = 0.s
         ratV.settings.fillMode = .precise
+        ratV.settings.totalStars = 10
         ratV.translatesAutoresizingMaskIntoConstraints = false
         return ratV
     }()
     
-    private var productModel: ProductModel!
+    private var movieModel: TopRatedMoviesModel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -62,7 +73,7 @@ class ProductCell: UICollectionViewCell {
         self.backgroundColor = .clear
         self.contentView.addSubview(containerView)
         
-        [photoView, titleLbl, priceLbl, ratingView].forEach { view in
+        [photoView, titleLbl, releaseLbl, descriptionLbl, ratingView].forEach { view in
             self.containerView.addSubview(view)
         }
         
@@ -75,8 +86,7 @@ class ProductCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        containerView.round(radius: 3.s, borderColor: .lightGray.withAlphaComponent(0.2), borderWidth: 1.s)
+        containerView.roundWithShadow(_cornerRadius: 5.s, _x: 0, _y: 0, _blar: 4, _spread: 0.0, _shadowOpacity: 1.0, _shadowColor: .lightGray.withAlphaComponent(0.8))
     }
     
     private func defineLayout() {
@@ -85,41 +95,49 @@ class ProductCell: UICollectionViewCell {
             make.leading.equalToSuperview().offset(10.s)
             make.top.equalToSuperview().offset(10.s)
             make.trailing.equalToSuperview().offset(-10.s)
-            make.bottom.equalToSuperview().offset(-10.s)
+            make.bottom.equalToSuperview().offset(-4.s)
         }
         
         photoView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10.s)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(140.s)
-            make.width.equalTo(140.s)
+            make.leading.equalToSuperview().offset(0.s)
+            make.top.equalToSuperview().offset(0.s)
+            make.bottom.equalToSuperview().offset(-0.s)
+            make.width.equalTo(120.s)
         }
         
         titleLbl.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10.s)
-            make.top.equalTo(photoView.snp.bottom).offset(10.s)
+            make.leading.equalTo(photoView.snp.trailing).offset(10.s)
+            make.top.equalToSuperview().offset(10.s)
             make.trailing.equalToSuperview().offset(-10.s)
         }
         
-        priceLbl.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10.s)
+        releaseLbl.snp.makeConstraints { make in
+            make.leading.equalTo(photoView.snp.trailing).offset(10.s)
             make.top.equalTo(titleLbl.snp.bottom).offset(10.s)
             make.trailing.equalToSuperview().offset(-10.s)
         }
         
+        descriptionLbl.snp.makeConstraints { make in
+            make.leading.equalTo(photoView.snp.trailing).offset(10.s)
+            make.top.equalTo(releaseLbl.snp.bottom).offset(20.s)
+            make.trailing.equalToSuperview().offset(-10.s)
+        }
+        
         ratingView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10.s)
-            make.top.equalTo(priceLbl.snp.bottom).offset(10.s)
+            make.leading.equalTo(photoView.snp.trailing).offset(10.s)
+            make.bottom.equalToSuperview().offset(-10.s)
         }
     }
     
-    public func setupCell(indexPath: IndexPath, productModel: ProductModel) {
-        self.productModel = productModel
-        let url = URL(string: productModel.imageUrls?.first ?? "")
-        photoView.sd_setImage(with: url, placeholderImage: UIImage(named: AppImages.transparent.rawValue))
-        titleLbl.text = productModel.title?.stringValue
-        priceLbl.text = "\(productModel.price?.intValue ?? 0)"
-        ratingView.rating = productModel.reviewAverage?.doubleValue ?? 0.0
-        ratingView.text = "(\(productModel.reviewCount?.intValue ?? 0))"
+    public func setupCell(indexPath: IndexPath, movieModel: TopRatedMoviesModel) {
+        self.movieModel = movieModel
+        
+        photoView.sd_setImage(with: movieModel.posterUrl, placeholderImage: UIImage(named: AppImages.transparent.rawValue))
+        titleLbl.text = movieModel.title
+        releaseLbl.text = movieModel.releaseDate?.convertTo(informat: DateFormatConstants.yyyy_mm_dd, outformat: DateFormatConstants.MMM_dd_yyyy)
+        descriptionLbl.text = movieModel.overview
+        ratingView.rating = Double(movieModel.voteAverage ?? 0.0)
+        print("rating: \(Double(movieModel.voteAverage ?? 0.0))")
+        ratingView.text = "(\(movieModel.voteCount ?? 0))"
     }
 }

@@ -33,8 +33,9 @@ final class NetworkServices {
     
     private func apiRequest<T: Decodable>(type: T.Type, method: HTTPMethod, url: String, params: [String: Any]?, completionHandler: @escaping (_ value: T?, _ error: Error?) -> Void) {
         let decoder = JSONDecoder()
+        print("url: \(url) params: \(params)")
         AF.sessionConfiguration.timeoutIntervalForRequest = 30
-        AF.request(url, method: method, parameters: params, encoding: JSONEncoding.default, headers: getHeaders())
+        AF.request(url, method: method, parameters: params, /*encoding: JSONEncoding.default,*/ headers: getHeaders())
             .validate(statusCode: 200..<206)
             .responseDecodable(of: type, decoder: decoder) { response in
                 completionHandler(response.value, response.error)

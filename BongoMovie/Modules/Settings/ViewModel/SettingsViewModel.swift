@@ -9,7 +9,7 @@ import Foundation
 
 enum LangCode: String {
     case en
-    case ja
+    case hi
 }
 
 class SettingsViewModel {
@@ -35,7 +35,7 @@ class SettingsViewModel {
         case AppTexts.translate_id_0014.rawValue.tr:
             return .en
         case AppTexts.translate_id_0015.rawValue.tr:
-            return .ja
+            return .hi
         default:
             return .en
         }
@@ -45,7 +45,7 @@ class SettingsViewModel {
         switch code {
         case .en:
             return AppTexts.translate_id_0014.rawValue.tr
-        case .ja:
+        case .hi:
             return AppTexts.translate_id_0015.rawValue.tr
         }
     }

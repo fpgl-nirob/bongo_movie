@@ -58,4 +58,22 @@ extension UITableViewCell {
     }
 }
 
+extension Date {
+    func toString(format: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        let str = dateFormatter.string(from: self)
+
+        return str
+    }
+}
+
+extension Int {
+    var hourFormat: String {
+        let hours = self / 60
+        let minutes = self % 60
+        return "\(hours)h \(minutes)m"
+    }
+}
+
 

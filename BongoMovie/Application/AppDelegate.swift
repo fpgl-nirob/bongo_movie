@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     public func setHomeViewController() {
-        let searchVC = ProductListViewController()
+        let searchVC = TopRatedMoviesViewController()
         let searchNC = CustomNavigationController(rootViewController: searchVC)
         window?.rootViewController = searchNC
         window?.makeKeyAndVisible()

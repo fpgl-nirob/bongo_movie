@@ -17,9 +17,12 @@ struct AppConstants {
 // MARK: APIConstants
 struct APIConstants {
     static let bearerKey = "Authorization"
+    static let apiKey = "c37d3b40004717511adb2c1fbb15eda4"
     
-    static let baseUrl = "https://api.doozie.ai/v1/api/"
-    static let productSearchEndPoint = "items/search"
+    static let imageUrl = "https://image.tmdb.org/t/p/original"
+    static let baseUrl = "https://api.themoviedb.org/3/"
+    static let topRatedEndPoint = "movie/top_rated"
+    static let movieDetailsEndPoint = "movie/"
 }
 
 enum AppTexts: String {
@@ -142,8 +145,22 @@ extension UIFont {
 
 extension UIColor {
     static let blueText = UIColor.init(hexString: "#3385FF")
+    static let detailBG = UIColor.init(hexString: "#0C0908") //562F25 //0C0908
     static let background = UIColor(named: "background")
     static let whiteBlack = UIColor(named: "white_black")
     static let whiteGray = UIColor(named: "white_gray")
     static let grayDarkLight = UIColor(named: "gray_dark_light")
+}
+
+struct DateFormatConstants {
+    static let yyyy_MM_dd_T_HH_mm_ss_mmm_z = "yyyy-MM-dd'T'HH:mm:ss.mmmZ"
+    static let yyyy_MM_dd_T_HH_mm_ss_z = "yyyy-MM-dd'T'HH:mm:ssZ"
+    static let yyyy_MM_dd_HH_mm_ss = "yyyy-MM-dd HH:mm:ss"
+    static let dd_MMM_yyyy = "dd MMM yyyy"
+    static let MMM_dd_yyyy = "MMM dd, yyyy"
+    static let yyyy_mm_dd = "yyyy-MM-dd"
+    static let yyyy_mm_dd_slash = "yyyy/MM/dd"
+    static let yyyy = "yyyy"
+    static let dd_mmm = "dd MMM"
+    static let hh_mm_a = "hh:mm a"
 }

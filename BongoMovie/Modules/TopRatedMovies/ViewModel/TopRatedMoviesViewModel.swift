@@ -7,34 +7,31 @@
 
 import Foundation
 
-class ProductListViewModel {
-    enum Section {
-        case main
-    }
+class TopRatedMoviesViewModel {
     var searchText: String = ""
-    var productModels: [ProductModel] = []
-    var shouldLoadMoreData = false
+    var movieModels: [TopRatedMoviesModel] = []
     var page = 1
+    var totalPages = 0
     var apiCalling = false
     
     private static let limit = 30
     
     func getParams() -> [String: Any] {
-        return ["rakuten_query_parameters": ["keyword": searchText], "yahoo_query_parameters": ["query": searchText, "results": "\(ProductListViewModel.limit)"], "from_scheduler": false]
+        return ["api_key": APIConstants.apiKey, "page": self.page]
     }
     
     func searchProduct(onResult: @escaping (_ message: String?, _ error: String?) -> Void) {
-        NetworkServices.shared.postRequest(type: ProductListResponseModel.self, endPoint: APIConstants.productSearchEndPoint, params: getParams()) {[weak self] value, error in
+        NetworkServices.shared.getRequest(type: TopRatedMoviesListModel.self, endPoint: APIConstants.topRatedEndPoint, params: getParams()) {[weak self] value, error in
             if value != nil { // success
-                if value?.success == true {
+                if value?.statusCode == nil {
                     let message = "default message"
-                    self?.productModels = value?.products ?? []
-                    self?.shouldLoadMoreData = (value?.products?.count ?? 0) >= ProductListViewModel.limit
+                    self?.movieModels = value?.movies ?? []
+                    self?.totalPages = (value?.movies?.count ?? 0)
                     self?.page = 2
                     onResult(message, nil)
                 }
                 else { // no data found
-                    let errorMsg = value?.errorDetails?.first?.message ?? "default error"
+                    let errorMsg = value?.statusMessage ?? "default error"
                     print("errorMsg: \(errorMsg)")
                     onResult(nil, errorMsg)
                 }
@@ -49,17 +46,16 @@ class ProductListViewModel {
     
     func loadMoreProduct(onResult: @escaping (_ message: String?, _ error: String?) -> Void) {
         
-        NetworkServices.shared.postRequest(type: ProductListResponseModel.self, endPoint: APIConstants.productSearchEndPoint, params: getParams()) {[weak self] value, error in
+        NetworkServices.shared.getRequest(type: TopRatedMoviesListModel.self, endPoint: APIConstants.topRatedEndPoint, params: getParams()) {[weak self] value, error in
             if value != nil { // success
-                if value?.success == true {
+                if value?.statusCode == nil {
                     let message = "default message"
-                    self?.productModels.append(contentsOf: value?.products ?? [])
-                    self?.shouldLoadMoreData = (value?.products?.count ?? 0) >= ProductListViewModel.limit
+                    self?.movieModels.append(contentsOf: value?.movies ?? [])
                     self?.page = (self?.page ?? 1) + 1
                     onResult(message, nil)
                 }
                 else { // no data found
-                    let errorMsg = value?.errorDetails?.first?.message ?? "default error"
+                    let errorMsg = value?.statusMessage ?? "default error"
                     print("message: \(errorMsg)")
                     onResult(nil, errorMsg)
                 }

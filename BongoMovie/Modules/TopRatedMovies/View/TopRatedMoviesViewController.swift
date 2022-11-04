@@ -6,29 +6,19 @@
 //
 
 import UIKit
+import SnapKit
 
-class ProductListViewController: BaseViewController, Alertable {
+class TopRatedMoviesViewController: BaseViewController, Alertable {
     
-    private lazy var photoCollectionView: UICollectionView = {
-        let collectionV = UIView.createCollectionView(delegate: self, dataSource: nil)
-        collectionV.collectionViewLayout = ProductListFlowLayout()
+    private lazy var moviesCollectionView: UICollectionView = {
+        let collectionV = UIView.createCollectionView(delegate: self, dataSource: self)
+        collectionV.collectionViewLayout = TopRatedMoviesFlowLayout()
         collectionV.register(ProductCell.self, forCellWithReuseIdentifier: ProductCell.cellIdentifier)
         collectionV.backgroundColor = .clear
         collectionV.isScrollEnabled = true
         collectionV.showsVerticalScrollIndicator = false
         collectionV.showsHorizontalScrollIndicator = false
         return collectionV
-    }()
-    
-    private lazy var searchBar: UISearchBar = {
-        let searchB = UISearchBar()
-        searchB.delegate = self
-        searchB.backgroundColor = .background
-        searchB.barTintColor = .background
-        searchB.setBackgroundImage(UIImage(named: AppImages.transparent.rawValue), for: .any, barMetrics: .default)
-        searchB.placeholder = AppTexts.translate_id_0006.rawValue.tr
-        searchB.translatesAutoresizingMaskIntoConstraints = false
-        return searchB
     }()
     
     private let hintLbl: UILabel = {
@@ -42,13 +32,7 @@ class ProductListViewController: BaseViewController, Alertable {
     }()
     
     var refreshController = UIRefreshControl()
-    
-    // MARK: - Value Types
-    typealias DataSource = UICollectionViewDiffableDataSource<ProductListViewModel.Section, ProductModel>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<ProductListViewModel.Section, ProductModel>
-    
-    private lazy var dataSource = makeDataSource()
-    private var viewModel = ProductListViewModel()
+    private var viewModel = TopRatedMoviesViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +42,7 @@ class ProductListViewController: BaseViewController, Alertable {
         addSubViews()
         setupRefreshController()
         setupLayout()
+        loadServerData()
     }
     
     deinit {
@@ -67,7 +52,6 @@ class ProductListViewController: BaseViewController, Alertable {
     
     @objc func languageChanged(notification: NSNotification) {
         updateNavbarTitle(title: .translate_id_0005)
-        searchBar.placeholder = AppTexts.translate_id_0006.rawValue.tr
         hintLbl.text = AppTexts.translate_id_0007.rawValue.tr
     }
     
@@ -78,32 +62,26 @@ class ProductListViewController: BaseViewController, Alertable {
             self?.navigationController?.pushViewController(vc, animated: true)
         })
         
-        [searchBar, hintLbl, photoCollectionView].forEach { view in
+        [hintLbl, moviesCollectionView].forEach { view in
             self.view.addSubview(view)
         }
     }
     
     private func setupRefreshController() {
-        photoCollectionView.refreshControl = refreshController
+        moviesCollectionView.refreshControl = refreshController
         refreshController.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
     }
     
     private func setupLayout() {
-        searchBar.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(navBarHeight)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(40.s)
-            make.width.equalTo(335.s)
-        }
         
         hintLbl.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
         
-        photoCollectionView.snp.makeConstraints { make in
+        moviesCollectionView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(2.s)
             make.trailing.equalToSuperview().offset(-2.s)
-            make.top.equalTo(searchBar.snp.bottom).offset(4.s)
+            make.top.equalToSuperview().offset(navBarHeight)
             make.bottom.equalTo(view.snp.bottomMargin)
         }
     }
@@ -116,7 +94,7 @@ class ProductListViewController: BaseViewController, Alertable {
             if let error = error {
                 self?.showAlert(message: error)
             } else {
-                self?.applySnapshot(animatingDifferences: false)
+                self?.moviesCollectionView.reloadData()
             }
         }
     }
@@ -133,47 +111,40 @@ class ProductListViewController: BaseViewController, Alertable {
                 self?.showAlert(message: error)
             } else {
                 self?.hintLbl.isHidden = true
-                self?.applySnapshot(animatingDifferences: true)
+                self?.moviesCollectionView.reloadData()
             }
         }
     }
-    
-    // MARK: - DataSource
-    func makeDataSource() -> DataSource {
-        let dataSource = DataSource(collectionView: photoCollectionView, cellProvider: { (collectionView, indexPath, productModel) -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.cellIdentifier, for: indexPath) as? ProductCell else {
-                fatalError("ProductCell is not initialized properly")
-            }
-            cell.setupCell(indexPath: indexPath, productModel: productModel)
-            return cell
-        })
-        return dataSource
-    }
-    
-    func applySnapshot(animatingDifferences: Bool = true) {
-        
-        var snapshot = Snapshot()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(viewModel.productModels)
-        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
-    }
 }
 
-extension ProductListViewController: UICollectionViewDelegate {
+extension TopRatedMoviesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("you select at: \(indexPath.row)")
-        let vc = ProductDetailsViewController()
-        vc.productModel = viewModel.productModels[indexPath.row]
+        let vc = MovieDetailsViewController()
+        vc.movieId = viewModel.movieModels[indexPath.row].id
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
-extension ProductListViewController: UIScrollViewDelegate {
+extension TopRatedMoviesViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.movieModels.count
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.cellIdentifier, for: indexPath) as? ProductCell else {
+            fatalError("ProductCell is not initialized")
+        }
+        cell.setupCell(indexPath: indexPath, movieModel: viewModel.movieModels[indexPath.item])
+        return cell
+    }
+}
+
+extension TopRatedMoviesViewController: UIScrollViewDelegate {
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
-        guard distanceFromBottom < height && viewModel.shouldLoadMoreData else { return }
+        guard distanceFromBottom < height && viewModel.totalPages >= viewModel.page else { return }
         
         if !viewModel.apiCalling {
             viewModel.apiCalling = true
@@ -184,14 +155,14 @@ extension ProductListViewController: UIScrollViewDelegate {
                 if let error = error {
                     self?.showAlert(message: error)
                 } else {
-                    self?.applySnapshot(animatingDifferences: true)
+                    self?.moviesCollectionView.reloadData()
                 }
             }
         }
     }
 }
 
-extension ProductListViewController: UISearchBarDelegate {
+extension TopRatedMoviesViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.searchText = searchText
     }
@@ -201,9 +172,8 @@ extension ProductListViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
         loadServerData()
-        photoCollectionView.setContentOffset(CGPoint.zero, animated: false)
+        moviesCollectionView.setContentOffset(CGPoint.zero, animated: false)
     }
 }
 
