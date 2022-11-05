@@ -8,7 +8,6 @@
 import Foundation
 
 class TopRatedMoviesViewModel {
-    var searchText: String = ""
     var movieModels: [TopRatedMoviesModel] = []
     var page = 1
     var totalPages = 0
@@ -20,7 +19,7 @@ class TopRatedMoviesViewModel {
         return ["api_key": APIConstants.apiKey, "page": self.page]
     }
     
-    func searchProduct(onResult: @escaping (_ message: String?, _ error: String?) -> Void) {
+    func getMovieList(onResult: @escaping (_ message: String?, _ error: String?) -> Void) {
         NetworkServices.shared.getRequest(type: TopRatedMoviesListModel.self, endPoint: APIConstants.topRatedEndPoint, params: getParams()) {[weak self] value, error in
             if value != nil { // success
                 if value?.statusCode == nil {
@@ -44,7 +43,7 @@ class TopRatedMoviesViewModel {
         }
     }
     
-    func loadMoreProduct(onResult: @escaping (_ message: String?, _ error: String?) -> Void) {
+    func loadMoreMovies(onResult: @escaping (_ message: String?, _ error: String?) -> Void) {
         
         NetworkServices.shared.getRequest(type: TopRatedMoviesListModel.self, endPoint: APIConstants.topRatedEndPoint, params: getParams()) {[weak self] value, error in
             if value != nil { // success

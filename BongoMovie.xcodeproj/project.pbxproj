@@ -55,11 +55,24 @@
 		1A67AD88291436C2005C1220 /* TopRatedMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A67AD7F291436C2005C1220 /* TopRatedMovieCell.swift */; };
 		1A67AD89291436C2005C1220 /* TopRatedMoviesFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A67AD80291436C2005C1220 /* TopRatedMoviesFlowLayout.swift */; };
 		1A67AD8A291436C2005C1220 /* TopRatedMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A67AD81291436C2005C1220 /* TopRatedMoviesViewController.swift */; };
+		1A7132A5291615BE00E69499 /* MovieDetailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7132A4291615BE00E69499 /* MovieDetailsTests.swift */; };
+		1A7132AA2916167100E69499 /* TopRatedMovesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7132A92916167100E69499 /* TopRatedMovesTests.swift */; };
 		1ACF45C529153CB5002DF819 /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACF45C429153CB5002DF819 /* MovieDetailsViewModel.swift */; };
 		1ACF45C829153E7D002DF819 /* MovieDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACF45C729153E7D002DF819 /* MovieDetailsModel.swift */; };
 		1ACF45CA291557A8002DF819 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACF45C9291557A8002DF819 /* CircularProgressView.swift */; };
+		1AD1572E2915936400ABA3A3 /* BongoMovieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD1572D2915936400ABA3A3 /* BongoMovieTests.swift */; };
 		E9BC7686167023704332EE89 /* Pods_BongoMovie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E17CBB4C52E087BB07ABF95E /* Pods_BongoMovie.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1AD1572F2915936400ABA3A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A2FF89B2914122D008C4F6F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1A2FF8A22914122D008C4F6F;
+			remoteInfo = BongoMovie;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		028D2F6F5D5DC85620ABB007 /* Pods-BongoMovie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BongoMovie.release.xcconfig"; path = "Target Support Files/Pods-BongoMovie/Pods-BongoMovie.release.xcconfig"; sourceTree = "<group>"; };
@@ -113,10 +126,14 @@
 		1A67AD7F291436C2005C1220 /* TopRatedMovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopRatedMovieCell.swift; sourceTree = "<group>"; };
 		1A67AD80291436C2005C1220 /* TopRatedMoviesFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesFlowLayout.swift; sourceTree = "<group>"; };
 		1A67AD81291436C2005C1220 /* TopRatedMoviesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesViewController.swift; sourceTree = "<group>"; };
+		1A7132A4291615BE00E69499 /* MovieDetailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsTests.swift; sourceTree = "<group>"; };
+		1A7132A92916167100E69499 /* TopRatedMovesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMovesTests.swift; sourceTree = "<group>"; };
 		1ACF45C429153CB5002DF819 /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
 		1ACF45C729153E7D002DF819 /* MovieDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsModel.swift; sourceTree = "<group>"; };
 		1ACF45C9291557A8002DF819 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		1ACF45CB29159103002DF819 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1AD1572B2915936400ABA3A3 /* BongoMovieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BongoMovieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AD1572D2915936400ABA3A3 /* BongoMovieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BongoMovieTests.swift; sourceTree = "<group>"; };
 		3C43D8055C358694AC07B771 /* Pods-BongoMovie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BongoMovie.debug.xcconfig"; path = "Target Support Files/Pods-BongoMovie/Pods-BongoMovie.debug.xcconfig"; sourceTree = "<group>"; };
 		E17CBB4C52E087BB07ABF95E /* Pods_BongoMovie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BongoMovie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -130,6 +147,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1AD157282915936400ABA3A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -137,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				1A2FF8A52914122D008C4F6F /* BongoMovie */,
+				1AD1572C2915936400ABA3A3 /* BongoMovieTests */,
 				1A2FF8A42914122D008C4F6F /* Products */,
 				349BF2C57B7FC5B7171EAD4C /* Pods */,
 				26ABF3A2793B1B284A3A6430 /* Frameworks */,
@@ -147,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				1A2FF8A32914122D008C4F6F /* BongoMovie.app */,
+				1AD1572B2915936400ABA3A3 /* BongoMovieTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -370,6 +396,31 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		1A7132A6291615D100E69499 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				1A7132A82916161E00E69499 /* MovieDetails */,
+				1A7132A7291615E200E69499 /* TopRatedMovies */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		1A7132A7291615E200E69499 /* TopRatedMovies */ = {
+			isa = PBXGroup;
+			children = (
+				1A7132A92916167100E69499 /* TopRatedMovesTests.swift */,
+			);
+			path = TopRatedMovies;
+			sourceTree = "<group>";
+		};
+		1A7132A82916161E00E69499 /* MovieDetails */ = {
+			isa = PBXGroup;
+			children = (
+				1A7132A4291615BE00E69499 /* MovieDetailsTests.swift */,
+			);
+			path = MovieDetails;
+			sourceTree = "<group>";
+		};
 		1ACF45C329153C3D002DF819 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,6 +435,15 @@
 				1ACF45C729153E7D002DF819 /* MovieDetailsModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1AD1572C2915936400ABA3A3 /* BongoMovieTests */ = {
+			isa = PBXGroup;
+			children = (
+				1A7132A6291615D100E69499 /* Modules */,
+				1AD1572D2915936400ABA3A3 /* BongoMovieTests.swift */,
+			);
+			path = BongoMovieTests;
 			sourceTree = "<group>";
 		};
 		26ABF3A2793B1B284A3A6430 /* Frameworks */ = {
@@ -425,6 +485,24 @@
 			productReference = 1A2FF8A32914122D008C4F6F /* BongoMovie.app */;
 			productType = "com.apple.product-type.application";
 		};
+		1AD1572A2915936400ABA3A3 /* BongoMovieTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1AD157332915936400ABA3A3 /* Build configuration list for PBXNativeTarget "BongoMovieTests" */;
+			buildPhases = (
+				1AD157272915936400ABA3A3 /* Sources */,
+				1AD157282915936400ABA3A3 /* Frameworks */,
+				1AD157292915936400ABA3A3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1AD157302915936400ABA3A3 /* PBXTargetDependency */,
+			);
+			name = BongoMovieTests;
+			productName = BongoMovieTests;
+			productReference = 1AD1572B2915936400ABA3A3 /* BongoMovieTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -437,6 +515,10 @@
 				TargetAttributes = {
 					1A2FF8A22914122D008C4F6F = {
 						CreatedOnToolsVersion = 13.4;
+					};
+					1AD1572A2915936400ABA3A3 = {
+						CreatedOnToolsVersion = 13.4;
+						TestTargetID = 1A2FF8A22914122D008C4F6F;
 					};
 				};
 			};
@@ -455,6 +537,7 @@
 			projectRoot = "";
 			targets = (
 				1A2FF8A22914122D008C4F6F /* BongoMovie */,
+				1AD1572A2915936400ABA3A3 /* BongoMovieTests */,
 			);
 		};
 /* End PBXProject section */
@@ -488,6 +571,13 @@
 				1A67AD4E29142F56005C1220 /* Inter-Regular.ttf in Resources */,
 				1A67AD5929142F56005C1220 /* Roboto-Black.ttf in Resources */,
 				1A67AD4929142F56005C1220 /* Inter-Light.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1AD157292915936400ABA3A3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,7 +660,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1AD157272915936400ABA3A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A7132AA2916167100E69499 /* TopRatedMovesTests.swift in Sources */,
+				1AD1572E2915936400ABA3A3 /* BongoMovieTests.swift in Sources */,
+				1A7132A5291615BE00E69499 /* MovieDetailsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1AD157302915936400ABA3A3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1A2FF8A22914122D008C4F6F /* BongoMovie */;
+			targetProxy = 1AD1572F2915936400ABA3A3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1A2FF8B12914122F008C4F6F /* LaunchScreen.storyboard */ = {
@@ -727,7 +835,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bongo.BongoMovie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bongo.bongomovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -755,11 +863,47 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bongo.BongoMovie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bongo.bongomovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1AD157312915936400ABA3A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bongo.BongoMovieTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BongoMovie.app/BongoMovie";
+			};
+			name = Debug;
+		};
+		1AD157322915936400ABA3A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bongo.BongoMovieTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BongoMovie.app/BongoMovie";
 			};
 			name = Release;
 		};
@@ -780,6 +924,15 @@
 			buildConfigurations = (
 				1A2FF8B82914122F008C4F6F /* Debug */,
 				1A2FF8B92914122F008C4F6F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1AD157332915936400ABA3A3 /* Build configuration list for PBXNativeTarget "BongoMovieTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1AD157312915936400ABA3A3 /* Debug */,
+				1AD157322915936400ABA3A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

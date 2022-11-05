@@ -10,7 +10,7 @@ import SnapKit
 import SDWebImage
 import Cosmos
 
-class ProductCell: UICollectionViewCell {
+class TopRatedMovieCell: UICollectionViewCell {
     
     private let containerView: UIView = {
         let containerV = UIView.createView()

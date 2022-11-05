@@ -13,7 +13,7 @@ class TopRatedMoviesViewController: BaseViewController, Alertable {
     private lazy var moviesCollectionView: UICollectionView = {
         let collectionV = UIView.createCollectionView(delegate: self, dataSource: self)
         collectionV.collectionViewLayout = TopRatedMoviesFlowLayout()
-        collectionV.register(ProductCell.self, forCellWithReuseIdentifier: ProductCell.cellIdentifier)
+        collectionV.register(TopRatedMovieCell.self, forCellWithReuseIdentifier: TopRatedMovieCell.cellIdentifier)
         collectionV.backgroundColor = .clear
         collectionV.isScrollEnabled = true
         collectionV.showsVerticalScrollIndicator = false
@@ -88,7 +88,7 @@ class TopRatedMoviesViewController: BaseViewController, Alertable {
     
     private func loadServerData() {
         self.showHUD()
-        viewModel.searchProduct {[weak self] message, error in
+        viewModel.getMovieList {[weak self] message, error in
             self?.hideHUD()
             self?.hintLbl.isHidden = true
             if let error = error {
@@ -100,11 +100,7 @@ class TopRatedMoviesViewController: BaseViewController, Alertable {
     }
     
     @objc func handleRefresh() {
-        guard !viewModel.searchText.isEmpty else {
-            refreshController.endRefreshing()
-            return
-        }
-        viewModel.searchProduct {[weak self] message, error in
+        viewModel.getMovieList {[weak self] message, error in
             self?.refreshController.endRefreshing()
             if let error = error {
                 self?.hintLbl.isHidden = false
@@ -131,8 +127,8 @@ extension TopRatedMoviesViewController: UICollectionViewDataSource {
         return viewModel.movieModels.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.cellIdentifier, for: indexPath) as? ProductCell else {
-            fatalError("ProductCell is not initialized")
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopRatedMovieCell.cellIdentifier, for: indexPath) as? TopRatedMovieCell else {
+            fatalError("TopRatedMovieCell is not initialized")
         }
         cell.setupCell(indexPath: indexPath, movieModel: viewModel.movieModels[indexPath.item])
         return cell
@@ -149,7 +145,7 @@ extension TopRatedMoviesViewController: UIScrollViewDelegate {
         if !viewModel.apiCalling {
             viewModel.apiCalling = true
             showHUD()
-            viewModel.loadMoreProduct {[weak self] message, error in
+            viewModel.loadMoreMovies {[weak self] message, error in
                 self?.viewModel.apiCalling = false
                 self?.hideHUD()
                 if let error = error {
@@ -159,21 +155,6 @@ extension TopRatedMoviesViewController: UIScrollViewDelegate {
                 }
             }
         }
-    }
-}
-
-extension TopRatedMoviesViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.searchText = searchText
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        loadServerData()
-        moviesCollectionView.setContentOffset(CGPoint.zero, animated: false)
     }
 }
 
