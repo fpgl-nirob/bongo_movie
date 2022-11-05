@@ -63,7 +63,6 @@ final class NavBar: UIView {
         }
         
         if let rightBtnImgName = rightBtnImgName {
-            print("rightBtnImgName: \(rightBtnImgName)")
             rightButton = UIView.createButton(rightBtnImgName)
             rightButton.backgroundColor = .clear
             rightButton.addTarget(self, action: #selector(rightButtonPressed), for: .touchUpInside)

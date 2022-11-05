@@ -137,7 +137,6 @@ class TopRatedMovieCell: UICollectionViewCell {
         releaseLbl.text = movieModel.releaseDate?.convertTo(informat: DateFormatConstants.yyyy_mm_dd, outformat: DateFormatConstants.MMM_dd_yyyy)
         descriptionLbl.text = movieModel.overview
         ratingView.rating = Double(movieModel.voteAverage ?? 0.0)
-        print("rating: \(Double(movieModel.voteAverage ?? 0.0))")
         ratingView.text = "(\(movieModel.voteCount ?? 0))"
     }
 }

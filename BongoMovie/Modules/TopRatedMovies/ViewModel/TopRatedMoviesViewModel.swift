@@ -20,6 +20,7 @@ class TopRatedMoviesViewModel {
     }
     
     func getMovieList(onResult: @escaping (_ message: String?, _ error: String?) -> Void) {
+        self.page = 1
         NetworkServices.shared.getRequest(type: TopRatedMoviesListModel.self, endPoint: APIConstants.topRatedEndPoint, params: getParams()) {[weak self] value, error in
             if value != nil { // success
                 if value?.statusCode == nil {
