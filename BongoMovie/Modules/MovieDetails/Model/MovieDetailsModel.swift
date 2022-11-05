@@ -79,59 +79,59 @@ struct MovieDetailsModel: Decodable {
         case voteAverage  = "vote_average"
         case voteCount  = "vote_count"
     }
-}
-
-struct Genre: Decodable {
-    let id: Int?
-    let name: String?
-}
-
-struct BelongCollection: Decodable {
-    let id: Int?
-    let name: String?
-    let posterPath: String?
-    let backDropPath: String?
     
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case posterPath = "poster_path"
-        case backDropPath = "backdrop_path"
+    struct Genre: Decodable {
+        let id: Int?
+        let name: String?
     }
-}
 
-struct ProductionCompany: Decodable {
-    let id: Int?
-    let name: String?
-    let logoPath: String?
-    let originalCountry: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case logoPath = "logo_path"
-        case originalCountry = "origin_country"
+    struct BelongCollection: Decodable {
+        let id: Int?
+        let name: String?
+        let posterPath: String?
+        let backDropPath: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case id
+            case name
+            case posterPath = "poster_path"
+            case backDropPath = "backdrop_path"
+        }
     }
-}
 
-struct ProductionCountry: Decodable {
-    let iso: String?
-    let name: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case iso = "iso_3166_1"
-        case name
+    struct ProductionCompany: Decodable {
+        let id: Int?
+        let name: String?
+        let logoPath: String?
+        let originalCountry: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case id
+            case name
+            case logoPath = "logo_path"
+            case originalCountry = "origin_country"
+        }
     }
-}
 
-struct SpokenLanguage: Decodable {
-    let iso: String?
-    let name: String?
-    let englishName: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case iso = "iso_639_1"
-        case name
-        case englishName = "english_name"
+    struct ProductionCountry: Decodable {
+        let iso: String?
+        let name: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case iso = "iso_3166_1"
+            case name
+        }
+    }
+
+    struct SpokenLanguage: Decodable {
+        let iso: String?
+        let name: String?
+        let englishName: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case iso = "iso_639_1"
+            case name
+            case englishName = "english_name"
+        }
     }
 }
